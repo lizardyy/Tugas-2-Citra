@@ -1,0 +1,28 @@
+function hasilKonvolusi = konvolusiCitra(f, mask)
+    [m, n] = size(f);
+    [maskM, maskN] = size(mask);
+    mask = rot90(mask, 2); % Flip mask 180 degrees
+    
+    % Inisialisasi citra hasil konvolusi
+    hasilKonvolusi = zeros(m, n);
+    
+    % Loop melalui citra f untuk melakukan konvolusi
+    for i = 1:m
+        for j = 1:n
+            % Tentukan batas atas dan bawah indeks untuk konvolusi
+            atas = max(1, i - floor(maskM/2));
+            bawah = min(m, i + floor(maskM/2));
+            kiri = max(1, j - floor(maskN/2));
+            kanan = min(n, j + floor(maskN/2));
+            
+            % Hitung nilai konvolusi untuk piksel saat ini
+            nilaiKonvolusi = 0;
+            for x = atas:bawah
+                for y = kiri:kanan
+                    nilaiKonvolusi = nilaiKonvolusi + f(x, y) * mask(i - x + floor(maskM/2) + 1, j - y + floor(maskN/2) + 1);
+                end
+            end
+            hasilKonvolusi(i, j) = nilaiKonvolusi;
+        end
+    end
+end
