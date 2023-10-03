@@ -8,5 +8,8 @@ function deconvolved_image = penapisWiener(blurred_image, kernel, noise_variance
     
     % Melakukan dekonvolusi menggunakan penapis Wiener
     deconvolved_image = ifft2(Y .* wiener_filter);
-    deconvolved_image= uint8(abs(deconvolved_image));
+    
+    % Mengonversi hasil dekonvolusi ke dalam rentang nilai yang benar
+    deconvolved_image = real(deconvolved_image);
+    deconvolved_image = uint8(deconvolved_image);
 end
