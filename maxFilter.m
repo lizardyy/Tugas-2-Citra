@@ -13,8 +13,8 @@ function hasilFilter = maxFilter(citra, ukuranFilter)
     for i = (1+radius):(m-radius)
         for j = (1+radius):(n-radius)
             % Hitung nilai maxFilter untuk sub image
-            subimage = citra(i-radius:i+radius, j-radius:j+radius);
-            hasilFilter(i, j) = max(subimage(:));
+            subCitra = citra(i-radius:i+radius, j-radius:j+radius);
+            hasilFilter(i, j) = max(subCitra(:));
         end
     end
 end

@@ -1,14 +1,19 @@
-% Fungsi untuk menghilangkan derau dengan harmonic mean filter
+%% Fungsi untuk Harmonic Mean Filter
 function hasilFilter = harmonicMeanFilter(citra, ukuranFilter)
+     % mendapatkan ukuran citra
     [m, n] = size(citra);
+
+    % inisialisasi output image hasil min filter
     hasilFilter = citra;
+
+    % menghitung radius
     radius = floor(ukuranFilter / 2);
-    for i = 1:m
-        for j = 1:n
-            subimage = citra(max(1, i-radius):min(m, i+radius), max(1, j-radius):min(n, j+radius));
-            subimage = double(subimage);
-            subimage(subimage == 0) = eps; % Menghindari pembagian dengan 0
-            hasilFilter(i, j) = (ukuranFilter^2) / sum(1 ./ subimage(:));
+    for i = (1+radius):(m-radius)
+        for j = (1+radius):(n-radius)
+            % Hitung nilai harmonic mean Filter untuk sub citra
+            subCitra = citra(i-radius:i+radius, j-radius:j+radius);
+            rataRataHarmonik = numel(subCitra) / sum(1 ./ double(subCitra(:)));
+            hasilFilter(i, j) = uint8(rataRataHarmonik);
         end
     end
 end

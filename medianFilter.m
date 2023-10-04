@@ -12,8 +12,8 @@ function hasilFilter = medianFilter(citra, ukuranFilter)
     for i = (1+radius):(m-radius)
         for j = (1+radius):(n-radius)
             % Hitung nilai medianFilter untuk sub image
-            subimage = citra(i-radius:i+radius, j-radius:j+radius);
-            hasilFilter(i, j) = median(subimage(:));
+            subCitra = citra(i-radius:i+radius, j-radius:j+radius);
+            hasilFilter(i, j) = median(subCitra(:));
         end
     end
 end

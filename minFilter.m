@@ -13,8 +13,8 @@ function hasilFilter = minFilter(citra, ukuranFilter)
     for i = (1+radius):(m-radius)
         for j = (1+radius):(n-radius)
             % Hitung nilai minFilter untuk sub image
-            subimage = citra(i-radius:i+radius, j-radius:j+radius);
-            hasilFilter(i, j) = min(subimage(:));
+            subCitra = citra(i-radius:i+radius, j-radius:j+radius);
+            hasilFilter(i, j) = min(subCitra(:));
         end
     end
 end
