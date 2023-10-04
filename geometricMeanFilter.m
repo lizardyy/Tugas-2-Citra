@@ -12,8 +12,8 @@ function hasilFilter = geometricMeanFilter(citra, ukuranFilter)
     for i = (1+radius):(m-radius)
         for j = (1+radius):(n-radius)
             % Hitung nilai geometric mean Filter untuk sub citra
-            subCitra = citra(i-radius:i+radius, j-radius:j+radius);
-            hasilFilter(i, j) = uint8(prod(subCitra(:)) ^ (1/numel(subCitra)));
+            subCitra = double(citra(i-radius:i+radius, j-radius:j+radius));
+            hasilFilter(i, j) = uint8(prod(subCitra(:)) .^ (1/numel(subCitra)));
         end
     end
 end
