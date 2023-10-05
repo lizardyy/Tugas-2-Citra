@@ -1,7 +1,7 @@
-function result = ILPFilter(f, D0)
+function result = BLPFilter(f, D0)
     F = fft2(double(f));
 
-    % Create ILP Mask
+    % Create BLP Mask
     [M,N,z] = size(f);
     
     u = 0:M-1;
@@ -14,9 +14,10 @@ function result = ILPFilter(f, D0)
     
     [V, U] = meshgrid(v, u);
     D = sqrt(U.^2 + V.^2);
-    
-    % ILP formula
-    H = double(D <= D0);
+
+    % BLP formula
+    n = 1;  % use n = 1
+    H = 1 ./ (1 + (D ./ D0) .^ (2 * n));
 
     if z == 3
         H = cat(3, H, H, H);

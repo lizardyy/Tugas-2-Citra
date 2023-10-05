@@ -7,5 +7,5 @@ function result = spatialGaussFilter(f, n)
     mask = exp(pangkat) / (2*pi*sigma*sigma);
     mask = mask / sum(sum(mask));
 
-    result = konvolusiCitra(f, mask, floor(n/2), 1);
+    result = uint8(konvolusiCitra(double(f), mask, floor(n/2), 1));
 end
