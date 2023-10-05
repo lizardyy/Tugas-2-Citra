@@ -1,11 +1,15 @@
-function hasilKonvolusi = konvolusiCitra(f, mask, padding, stride)
-    [m, n, numChannels] = size(f);
+% % Melakukan konvolusi citra berukuran sembarang (M x N) dengan mask
+% berukuran N x N yang telah ditentukan. Contoh mask 3x3, dan 7x7 gaussian mask
+function hasilKonvolusi = konvolusiCitra(citra , mask, padding, stride)
+    % mendapatkan ukuran citra dan jumlah saluran warna
+    [m, n, numChannels] = size(citra );
+    % mendapatkan ukuran mask
     [maskM, maskN] = size(mask);
     
-    % Padding citra jika diperlukan
+    % menambahkan Padding citra 
     if padding > 0
-        f = padarray(f, [padding, padding], 0, 'both');
-        [m, n, ~] = size(f);
+        citra  = padarray(citra , [padding, padding], 0, 'both');
+        [m, n, ~] = size(citra);
     end
     
     % Inisialisasi citra hasil konvolusi
@@ -13,7 +17,7 @@ function hasilKonvolusi = konvolusiCitra(f, mask, padding, stride)
     hasilN = floor((n - maskN) / stride) + 1;
     hasilKonvolusi = zeros(hasilM, hasilN, numChannels);
     
-    % Loop melalui citra f untuk melakukan konvolusi
+    % Loop melalui citra citra  untuk melakukan konvolusi
     for i = 1:hasilM
         for j = 1:hasilN
             for k = 1:numChannels
@@ -24,7 +28,7 @@ function hasilKonvolusi = konvolusiCitra(f, mask, padding, stride)
                 kanan = kiri + maskN - 1;
 
                 % Hitung nilai konvolusi untuk piksel saat ini
-                subCitra = f(atas:bawah, kiri:kanan, k);
+                subCitra = citra(atas:bawah, kiri:kanan, k);
                 hasilKonvolusi(i, j, k) = sum(sum(subCitra .* mask));
             end
         end

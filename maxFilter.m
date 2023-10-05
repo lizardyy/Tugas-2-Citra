@@ -1,12 +1,20 @@
-% Fungsi untuk menghilangkan derau dengan max filter
+%% Function max filter
+% finding the brightest point in an image
+% reducing papper noise
 function hasilFilter = maxFilter(citra, ukuranFilter)
+    % mendapatkan ukuran citra
     [m, n] = size(citra);
+
+    % inisialisasi output image hasil min filter
     hasilFilter = citra;
+
+    % menghitung radius
     radius = floor(ukuranFilter / 2);
-    for i = 1:m
-        for j = 1:n
-            subimage = citra(max(1, i-radius):min(m, i+radius), max(1, j-radius):min(n, j+radius));
-            hasilFilter(i, j) = max(subimage(:));
+    for i = (1+radius):(m-radius)
+        for j = (1+radius):(n-radius)
+            % Hitung nilai maxFilter untuk sub image
+            subCitra = citra(i-radius:i+radius, j-radius:j+radius);
+            hasilFilter(i, j) = max(subCitra(:));
         end
     end
 end
