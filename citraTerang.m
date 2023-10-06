@@ -1,4 +1,4 @@
-function result = functionEmpat(f, X)
+function result = citraTerang(f, X)
     F =(fft2(f));
     
     F2 = X.*F;
